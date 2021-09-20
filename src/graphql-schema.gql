@@ -2,20 +2,35 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Project {
+  id: String!
+  name: String!
+  code: Int!
+  employees: [Employee!]
+}
+
 type Employee {
   id: String!
   firstName: String!
   lastName: String!
   designation: String!
   city: String
+  projectId: String!
+  project: Project!
 }
 
 type Query {
   getAllEmployees: [Employee!]!
+  getEmployee(id: String!): Employee!
+  getAllProjects: [Project!]!
+  getProject(id: String!): Project!
 }
 
 type Mutation {
   createEmployee(employeeInput: EmployeeCreateDTO!): Employee!
+  createProject(project: CreateProjectInput!): Project!
+  updateProject(project: UpdateProjectInput!): Project!
+  removeProject(id: String!): Project!
 }
 
 input EmployeeCreateDTO {
@@ -23,4 +38,16 @@ input EmployeeCreateDTO {
   lastName: String!
   designation: String!
   city: String
+  projectId: String!
+}
+
+input CreateProjectInput {
+  name: String!
+  code: Int!
+}
+
+input UpdateProjectInput {
+  name: String!
+  code: Int!
+  id: String!
 }
